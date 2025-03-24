@@ -1,0 +1,138 @@
+# Kobe Fork v3.0 - Ultimate Proxmark3 Firmware
+
+Welcome to **Kobe Fork v3.0** – the ultimate firmware for the **Proxmark3**. Built from scratch to outclass the Iceman fork, this firmware features bleeding-edge additions like AI-driven tag classification, brute-force attacks, Python integration, and UHF support.
+
+> **Designed for hackers. Loved by RFID nerds. Built to dominate.**
+
+---
+
+## 🚀 Features
+
+✅ Full **LF/HF/UHF** support (EM410x, MIFARE, ISO14443A/B, EPC Gen2)  
+✅ Interactive **CLI with tab completion, history, help**  
+✅ Signal analyzer (RSSI, modulation, noise metrics)  
+✅ Config flash system with wear leveling + recovery  
+✅ Brute-force engine for MIFARE Classic sector keys  
+✅ Emergency save on power loss  
+✅ Firmware update via serial CLI (`update`)  
+✅ AI tag classifier (rule-based for now, ML-ready)  
+✅ Python toolchain (`kobe_cli`, `kobe_flash`, `kobe_analyzer`)  
+✅ SWIG + Makefile bindings for scripting/testing  
+✅ JSON tag database output for GUI/dashboard use
+
+---
+
+## 📦 Directory Structure
+
+```
+KobeFork-Proxmark3/
+├── firmware/                # Core C firmware
+├── python_tools/           # Python CLI + tools
+├── tests/                  # Unit tests
+├── Makefile                # Build with `make`
+├── kobe_wrapper.i          # SWIG interface
+├── README.md               # You are here
+└── .gitignore
+```
+
+---
+
+## ⚙️ Build Instructions
+
+> 🛠 Requires: `arm-none-eabi-gcc`, `make`, `swig`, and `python3`
+
+### 🔧 Build Firmware
+```bash
+cd firmware/
+make clean
+make all
+```
+
+### 🧠 Build Python Bindings (optional)
+```bash
+make python_bindings
+```
+
+---
+
+## 🐍 Python Toolchain (under `python_tools/`)
+
+| Tool             | Description                               |
+|------------------|-------------------------------------------|
+| `kobe_cli.py`     | Interactive terminal to talk to Proxmark3 |
+| `kobe_flash.py`   | Send firmware updates via serial          |
+| `kobe_analyzer.py`| Plot signal RSSI/noise from `analyze` cmd |
+
+> Change serial port (`/dev/ttyACM0` or `COM3`) as needed.
+
+---
+
+## 🔥 Flashing the Firmware
+
+### 1. Compile your firmware:
+```bash
+make all
+```
+
+### 2. Connect device via USB
+
+### 3. Use `kobe_flash.py`:
+```bash
+python3 python_tools/kobe_flash.py /dev/ttyACM0 build/kobe_firmware.bin
+```
+
+> Or use your own DFU flasher / bootloader if preferred.
+
+---
+
+## 🧪 Run Unit Tests
+
+```bash
+cd tests/
+python3 test_communication.py
+```
+
+---
+
+## 🧬 Command Reference (CLI)
+
+| Command      | Description |
+|--------------|-------------|
+| `scan`       | Scan for LF/HF/UHF tags |
+| `read`       | Read tag (e.g., MIFARE block, EM410x UID) |
+| `write`      | Write to writable tag (MIFARE supported) |
+| `analyze`    | Show signal RSSI, noise, modulation |
+| `brute`      | Brute-force attack on MIFARE sector 0 |
+| `update <size>` | Receive and flash firmware over USB |
+| `monitor`    | USB monitor mode (for dev/debug) |
+| `ai`         | Run AI classifier on detected tag |
+| `config`     | View/change system config |
+| `db`         | View stored tags from flash |
+| `history`    | Show previous commands |
+| `help`       | Show all commands |
+
+---
+
+## 🧠 AI & Automation Ready
+- `get_tag_db_json()` returns tag logs as JSON (for GUIs/dashboards)
+- `send_command("scan")` lets you script RFID actions from Python
+- Easily extend with ChatGPT, LLMs, or cloud dashboards
+
+---
+
+## 🌐 Share It
+This firmware is for the community. If you like it:
+- ⭐ Star the repo
+- 🗣 Share it on Discord, Reddit, forums
+- 🛠 Contribute with pull requests or issues
+
+---
+
+## 🤘 Shout-out
+Built by Kobe. Inspired by frustration. Polished by obsession.
+
+Welcome to the next generation of Proxmark firmware. 
+---
+
+## 🧷 License
+MIT – Use it, fork it, break it, improve it. Just don’t sell snake oil.
